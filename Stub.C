@@ -14,8 +14,6 @@
 
 #define CONVERT(x) x/PAGESIZE * PAGESIZE + PAGESIZE
 
-
-
 void getfilename(char *dest ){
 
 char path[PATH_MAX]="/proc/self/exe";
@@ -26,10 +24,6 @@ if(result==-1){
 }
 
 }
-
-
-
-
 
 void find_library(Elf32_Phdr *PHT_INTERNALS[],int number,int fd,int size){
 
@@ -91,13 +85,11 @@ i++;
 void *create_area(int pagesize,int fd,int offset,int realsize){
 
 char *addr=mmap(NULL,pagesize, PROT_WRITE | PROT_READ | PROT_EXEC,MAP_ANONYMOUS|MAP_SHARED,-1,0);
+
 char *temp=malloc(realsize);
 
-
 lseek(fd,offset,SEEK_SET);
-
 read(fd,temp,realsize);
-
 memcpy(addr,temp,realsize);
 
 free(temp);
